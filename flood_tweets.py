@@ -11,12 +11,10 @@ from IPython.display import clear_output
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAOUiUgEAAAAAsvJVa%2FiKrNdBLixovIqtPDDSw9c%3DKa7EPzPu0FC3zHiLAXrIW3SkxqA45qWbUCmfINBQ6YDj1mosIA"
-consumer_key = "RQ5FoKq3u5jfnc1Qhl8O6c8SV"
-consumer_secret = "UHf7IWjv3eK9sw8fbRvYjiS6guhtfDQ8kxIFa82HkFMudGkte4"
 
 
-query = "Hurricane"
+
+query = "anime"
 
 auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
@@ -25,8 +23,8 @@ if (not api):
     sys.exit(-1)
 
 tweet_lst=[]
-geoc= "30.391830,-92.329102,25mi"
-for tweet in tweepy.Cursor(api.search_tweets,q=query, geocode=geoc).items(100):
+geoc= "35.652832,139.839478,100mi"
+for tweet in tweepy.Cursor(api.search_tweets, query).items(100):
     tweetDate = tweet.created_at.date()
     if(tweet.coordinates !=None):
         tweet_lst.append([tweetDate,tweet.id,tweet.
